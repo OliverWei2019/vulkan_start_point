@@ -5,14 +5,10 @@
 ![维京人的小屋](Vikings_Room.PNG)
 
 ## 
-<details><summary>设计理念和想法</summary>
+<details><summary>实施理念和想法</summary>
 <p>
-
-## 间接绘制和Bindless
-#### 间接绘制 vkCmdIndirectDraw(...)
-减少直接的drawCall，能交给GPU的统统交给GPU.在GPU的缓冲区中存放好命令，把参数和数据提前放在一个大SSBO中，计算着色器执行的时候去调用。
-#### **Bindless**
-bind越少越好，BindVertexBuffer、BindIndexBuffer、BindPipeline 和 BindDescriptorSet 调用会让CPU慢下来，效率不高.
+	
+[vkguide](https://vkguide.dev)中没有MSAA和mipmap，我增加了MSAA和生成mipmap函数，另外使用一些以前的封装函数。  
 
 </p>
 
