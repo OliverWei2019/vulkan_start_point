@@ -31,83 +31,32 @@
 <details><summary>文件说明</summary>
 <p>
 
-<details><summary>asset-baker</summary>
-<p>
-
-## asset-baker
-asset_main.cpp文件可以制作一个名为baker.exe的asset生成器。asset生成器主要是制作渲染所需的一些资产，这些资产的格式能够提高引擎加载的速度。
-asset_main.cpp里都是一些模型解析函数,这部分都是我从相关的库偷来的:grin: .......然后自己修改了一部分来满足我自定义的asset格式。  
-
-#### 支持的asset格式
-texture有基本的.png,.jpg, 模型有gltf和fbx
-#### 生成的asset格式(** 自定义格式 **)
-texture全部生成.tx格式，材质material生成.MAT格式，网格生成.MESH格式
-#### 制作过程
-直接编译asset-main.cpp文件注意，这里需要一些库:: assimp,tinyGLTF,nvtt......,其中nvtt库生成可能会报错，然后需要手动将nvtt.dll库放到baker.exe文件旁。
-**注意:** assimp库必须先由vcpkg导入，nvtt库需要手动制作nvtt.dll，制作nvtt.dll不要使用Cmake,直接进入nvtt库文件夹下找到.sln文件编译，编译会报错，但能够生成复合本项目要求的nvtt.dll.  
-
-baker.exe会出现在新建的bin文件夹下
-#### 生成资产
-baker..exe需要nvtt.dll库，请将nvtt.dll库放到baker.exe同一目录
-cmd 打开 baker.exed的目录，将存放gltf或者fbx模型的文件夹复制，执行```baker.exe <folder directory> ```
-
-</p>
-</details>
-
-##
-<details><summary>assetlib</summary>
-<p>
-
-## assetlib
-
-根据[vkguide](https://vkguide.dev)的提示,使用压缩和解压缩后的二进制文件加载asset会更快，设计了主要的AssetFile格式，相应的封装了texture,material,mesh,prefab四种新的文件组织格式
-
-根据不同的资产类型的封装格式，设计一些读取封装信息read_xxx_info函数，pack_xxx,unpack_xxx函数负责解包和打包
-
-主要用到了LZ4的作为压缩和解压缩工具[LZ4](https://github.com/lz4/lz4),JSON格式的解析使用了[nlohmann](https://github.com/nlohmann/json)。
-AssetFile：
-```
-//assert meta file structure
-	struct AssetFile {
-		//type mean: assert type include:mesh texture and material
-		char type[4];//MESH TEXT MATX PRFB
-		int version;
-		std::string json;//assert(mesh,texture,material detail info
-		std::vector<char> binaryBlob;//compressed data(mesh vertex,texture pxiel...) 
-	};
-```
-
-Texture(Material Mesh Prefab类似):
-```
-struct TextureInfo {
-		uint64_t textureSize;
-		TextureFormat textureFormat;//RBGA8
-		CompressionMode compressionMode;//None, LZ4
-
-		std::string originalFile;//original file path
-		std::vector<PageInfo> pages;//pages info
-	};
- ```
- </p>
- </details>
- 
  ##
 <details><summary>assets</summary>
 <p>
 
 ## assets
-这里放了一些我自己测试使用的资产文件，前三个文件夹时glft模型文件，可以从这：[GLTF](https://github.com/KhronosGroup/glTF-Sample-Models)下载。
- 最后一个asset_export是使用baker.exe制作自定义资产格式的输出文件，引擎将优先从里加载资产
+这里放了一些我自己测试使用的资产文件，这些文件来自于[vkguide](https://vkguide.dev), 不包括README展示的维京人的小屋模型，需要手动导入。
  </p>
  </details>
  
+  ##
+<details><summary>bin/Debug</summary>
+<p>
+
+## bin/Debug
+这是本机编译出来的文件，vulkan_guide.exe可以查看效果
+ </p>
+ </details>
+ 
+ 
  ##
- <details><summary>dudu—engine</summary>
+ <details><summary>src</summary>
  <p>
  
-## dudu-engine
+## src
  
- 主要的engine文件都在这里，包括几个大方面
+ 主要的实现文件都在这里，包括几个大方面
  ### engine
  vk_engine.cpp包含了一些vulkan的初始化，imgui的创建，资产加载，场景初始化，以及渲染过程.   
  vk_engine_scenerender.cpp是具体的渲染过程函数这部分需要和vk_scene.cpp结合。  
@@ -128,17 +77,6 @@ struct TextureInfo {
  ### shader
  vk_shader.cpp 负责加载shader模型以及反射spv文件，需要一个库[SPIRV-Reflect](https://github.com/KhronosGroup/SPIRV-Reflect)。
  spv反射能解决很大部分手里劳动:grin:   
-
-</p>
-</details>
-
-##
-<details><summary>libs</summary>
-<p>
-
-## libs
-
-不多，就放了imgui和nvtt的lib文件
 
 </p>
 </details>
