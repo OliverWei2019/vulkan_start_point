@@ -15,12 +15,13 @@
 </details>
 
 ## 
-<details><summary>编译</summary>
+<details><summary>RUN</summary>
 <p>
 
 ### Cmake+Win10+VS2019
+	
 使用CmakeGUI编译，新建一个build文件夹，编译后的文件解决方案文件将存放在build文件夹下.  
-**注意:** 需要手动指定SDL库的路径PATH:xxx/xxx/SDL2.2.0.8，这里使用SDL2.2.0.8版本，如果需要使用assimp库还需要加载assimp库文件，我的repo没有包括，建议使用vcpkg导入assimp库
+查看运行效果可以直接点击```bin/Debug/```目录下的Vulkan_guide.exe文件
 
 </p>
 </details>
