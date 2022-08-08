@@ -1,5 +1,5 @@
 # vulkan_start_point
-这是一个学习vulkan的初级项目，清缓存，本地的文件不留了。
+这是一个学习vulkan的初级项目，这是旧的文件，我创建这个库用来保留之前的学习项目，清缓存，本地的文件不留了。
 主体框架来自于[vkguide](https://vkguide.dev)。  
 
 
