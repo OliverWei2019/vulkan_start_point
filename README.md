@@ -8,7 +8,7 @@
 <details><summary>实施理念和想法</summary>
 <p>
 	
-[vkguide](https://vkguide.dev)中没有MSAA和mipmap，我增加了MSAA和生成mipmap函数，另外使用一些以前的封装函数。  
+[vkguide](https://vkguide.dev)中没有MSAA和mipmap，我增加了MSAA和生成mipmap函数，另外使用我之前写的一些封装函数[VK_API_ENCA](https://github.com/OliverWei2019/Vulkan_Api_Enca)。  
 
 </p>
 
